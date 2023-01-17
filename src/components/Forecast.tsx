@@ -1,4 +1,8 @@
+import Sunrise from "./Icons/Sunrise";
+import Sunset from "./Icons/Sunset";
+import { getSunTime } from "../helpers";
 import { forcastType } from "./types";
+import Tile from "./Tile";
 
 type Props = {
   data: forcastType;
@@ -11,7 +15,7 @@ const Forecast = ({ data }: Props): JSX.Element => {
   );
 
   return (
-    <div className="w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-ls rounded drop-shadow-lg">
+    <div className="w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
       <div className="mx-auto w-[300px]">
         <section className="text-center">
           <h2 className="text-2xl font-black">
@@ -47,6 +51,56 @@ const Forecast = ({ data }: Props): JSX.Element => {
               </p>
             </div>
           ))}
+        </section>
+        <section className="flex flex-wrap justify-between text-zinc-700">
+          <div className="w-[140px] text-sm font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5">
+            <div className="flex items-center justify-center">
+              <Sunrise />
+              <h4 className="ml-1">Sunrise</h4>
+            </div>
+            <span className="mt-2">{getSunTime(data.sunrise)}</span>
+          </div>
+
+          <div className="w-[140px] text-sm font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5">
+            <div className="flex items-center justify-center">
+              <Sunset />
+              <h4 className="ml-1">Sunset</h4>
+            </div>
+            <span className="mt-2">{getSunTime(data.sunset)} </span>
+          </div>
+          <Tile
+            icon="wind"
+            title="Wind"
+            info={`${Math.round(today.wind.speed)} km/h`}
+          />
+          <Tile
+            icon="feels"
+            title="Feels like"
+            info={<TempFormat temp={today.main.feels_like} />}
+          />
+
+          <Tile
+            icon="humidity"
+            title="Humidity"
+            info={`${today.main.humidity} %`}
+          />
+
+          <Tile
+            icon="pop"
+            title="Precipitation"
+            info={`${Math.floor(today.pop * 1000)} `}
+          />
+
+          <Tile
+            icon="pressure"
+            title="Pressure"
+            info={`${today.main.pressure} hPa`}
+          />
+          <Tile
+            icon="visibility"
+            title="Visibility"
+            info={`${(today.visibility / 1000).toFixed()} km`}
+          />
         </section>
       </div>
     </div>

@@ -16,7 +16,7 @@ const Search = ({
   onSubmit,
 }: Props): JSX.Element => {
   return (
-    <main className="flex justify-center items-center bg-gradient-to-r from-purple-200 via-teal-500 to-blue-400 h-[100vh] w-full">
+    <main className="flex justify-center items-center  h-[100vh] w-full bg-gradient-to-r from-cyan-300 via-sky-400 to-sky-400">
       <section className="w-full md:max-w-[500px] p-4 flex flex-col text-center items-center justify-center md:px-10 lg:p-24 h-full lg:h-[500px] bg-white bg-opacity-20 backdrop-blur-ls rounded drop-shadow-lg text-zinc-700">
         <h1 className="text-4x1 font-black"> Weather App</h1>
         <p>Please enter your city name </p>
@@ -34,7 +34,7 @@ const Search = ({
                   className="text-left text-sm w-full px-2 py-1 cursor-pointer hover:bg-gray-700 hover:text-white"
                   onClick={() => onOptionSelect(option)}
                 >
-                  {option.name}
+                  {option.name}, {option.country}
                 </button>
               </li>
             ))}

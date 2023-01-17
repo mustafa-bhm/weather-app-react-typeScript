@@ -14,7 +14,8 @@ const useForcast = () => {
       }`
     )
       .then((response) => response.json())
-      .then((data) => setoptions(data));
+      .then((data) => setoptions(data))
+      .catch((err) => console.log(err));
   };
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
@@ -36,7 +37,8 @@ const useForcast = () => {
 
         setForcast(forcastData);
         console.log("===", forcastData);
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   const onSubmit = () => {
