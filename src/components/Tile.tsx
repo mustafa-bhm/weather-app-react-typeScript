@@ -9,7 +9,6 @@ type Props = {
   icon: "wind" | "feels" | "humidity" | "visibility" | "pressure" | "pop";
   title: string;
   info: string | JSX.Element;
-  description?: string | JSX.Element;
 };
 const icons = {
   wind: Wind,
@@ -19,7 +18,7 @@ const icons = {
   pressure: Pressure,
   pop: Pop,
 };
-const Tile = ({ icon, title, info, description }: Props): JSX.Element => {
+const Tile = ({ icon, title, info }: Props): JSX.Element => {
   const Icon = icons[icon];
 
   return (
@@ -32,7 +31,6 @@ const Tile = ({ icon, title, info, description }: Props): JSX.Element => {
 
         <h3 className="mt-2 text-lg">{info}</h3>
       </div>
-      <p className="text-xs font-bold">{description}</p>
     </article>
   );
 };
