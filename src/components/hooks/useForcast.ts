@@ -1,5 +1,6 @@
 import { useState, useEffect, ChangeEvent } from "react";
 import { optionType } from "../types";
+import { forcastType } from "../types";
 
 const useForcast = () => {
   const [term, setTerm] = useState<string>("");
@@ -24,10 +25,18 @@ const useForcast = () => {
 
   const getForcast = (city: optionType) => {
     fetch(
-      `https://api.openweathermap.org/data/2.5/forcast?lat=${city.lat}&lon=${city.lon}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=${city.lat}&lon=${city.lon}&units=metric&appid=${process.env.REACT_APP_API_KEY}`
     )
       .then((response) => response.json())
-      .then((data) => setForcast(data));
+      .then((data) => {
+        const forcastData = {
+          ...data.city,
+          list: data.list.slice(0, 16),
+        };
+
+        setForcast(forcastData);
+        console.log("===", forcastData);
+      });
   };
 
   const onSubmit = () => {
