@@ -1,6 +1,7 @@
 import Sunrise from "./Icons/Sunrise";
 import Sunset from "./Icons/Sunset";
-import { getSunTime } from "../helpers";
+import { formatAMPM } from "../helpers";
+
 import { forcastType } from "./types";
 import Tile from "./Tile";
 
@@ -13,19 +14,6 @@ const Forecast = ({ data }: Props): JSX.Element => {
   const TempFormat = ({ temp }: { temp: number }): JSX.Element => (
     <span>{Math.round(temp)}° </span>
   );
-
-  /// format AM/PM
-
-  function formatAMPM(date: any): string {
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    let strTime = hours + ":" + minutes + " " + ampm;
-    return strTime;
-  }
 
   return (
     <div className="w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
@@ -70,7 +58,9 @@ const Forecast = ({ data }: Props): JSX.Element => {
               <Sunrise />
               <h4 className="ml-1">Sunrise</h4>
             </div>
-            <span className="mt-2">{getSunTime(data.sunrise)}</span>
+            <span className="mt-2">
+              {formatAMPM(new Date(data.sunrise * 1000))}
+            </span>
           </div>
 
           <div className="w-[140px] text-sm font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5">
@@ -78,7 +68,9 @@ const Forecast = ({ data }: Props): JSX.Element => {
               <Sunset />
               <h4 className="ml-1">Sunset</h4>
             </div>
-            <span className="mt-2">{getSunTime(data.sunset)} </span>
+            <span className="mt-2">
+              {formatAMPM(new Date(data.sunset * 1000))}
+            </span>
           </div>
           <Tile
             icon="wind"
