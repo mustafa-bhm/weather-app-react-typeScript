@@ -14,6 +14,19 @@ const Forecast = ({ data }: Props): JSX.Element => {
     <span>{Math.round(temp)}° </span>
   );
 
+  /// format AM/PM
+
+  function formatAMPM(date: any): string {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? "PM" : "AM";
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    let strTime = hours + ":" + minutes + " " + ampm;
+    return strTime;
+  }
+
   return (
     <div className="w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg">
       <div className="mx-auto w-[300px]">
@@ -39,9 +52,8 @@ const Forecast = ({ data }: Props): JSX.Element => {
               className="inline-block text-center w-[50px] flex-shrink-0 "
               key={i}
             >
-              <p className="text-sm">
-                {i === 0 ? "Now" : new Date(item.dt * 1000).getHours()}
-              </p>
+              <p className="text-sm">{formatAMPM(new Date(item.dt * 1000))}</p>
+
               <img
                 src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
                 alt={`weather-icon-${item.weather[0].description}`}
