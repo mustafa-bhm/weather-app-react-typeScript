@@ -9,7 +9,7 @@ const useForcast = () => {
   const [forcast, setForcast] = useState<forcastType | null>(null);
   const getSearchOptions = (value: string) => {
     fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=4&appid=${
+      `https://api.openweathermap.org/geo/1.0/direct?q=${value.trim()}&limit=4&appid=${
         process.env.REACT_APP_API_KEY
       }`
     )
