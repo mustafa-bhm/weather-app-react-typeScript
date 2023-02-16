@@ -34,24 +34,7 @@ const Forecast = ({ data }: Props): JSX.Element => {
             L: <TempFormat temp={today.main.temp_min} />
           </p>
         </section>
-        <section className="flex overflow-x-scroll mt-4 pb-2 mb-5 ">
-          {data.list.map((item, i) => (
-            <div
-              className="inline-block text-center w-[50px] flex-shrink-0 "
-              key={i}
-            >
-              <p className="text-sm">{formatAMPM(new Date(item.dt * 1000))}</p>
 
-              <img
-                src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-                alt={`weather-icon-${item.weather[0].description}`}
-              />
-              <p className="text-sm font-bold">
-                <TempFormat temp={item.main.temp} />
-              </p>
-            </div>
-          ))}
-        </section>
         <section className="flex flex-wrap justify-between text-zinc-700">
           <div className="w-[140px] text-sm font-bold flex flex-col items-center bg-white/20 backdrop-blur-lg rounded drop-shadow-lg py-4 mb-5">
             <div className="flex items-center justify-center">
@@ -105,6 +88,24 @@ const Forecast = ({ data }: Props): JSX.Element => {
             title="Visibility"
             info={`${(today.visibility / 1000).toFixed()} km`}
           />
+        </section>
+        <section className="flex overflow-x-scroll mt-4 pb-2 mb-5 ">
+          {data.list.map((item, i) => (
+            <div
+              className="inline-block text-center w-[50px] flex-shrink-0 "
+              key={i}
+            >
+              <p className="text-sm">{formatAMPM(new Date(item.dt * 1000))}</p>
+
+              <img
+                src={`http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+                alt={`weather-icon-${item.weather[0].description}`}
+              />
+              <p className="text-sm font-bold">
+                <TempFormat temp={item.main.temp} />
+              </p>
+            </div>
+          ))}
         </section>
       </div>
     </div>
